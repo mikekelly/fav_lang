@@ -1,4 +1,4 @@
-require "rspec"
+require "spec_helper"
 
 describe "The CLI" do
   it "returns a Github user's favourite language" do
