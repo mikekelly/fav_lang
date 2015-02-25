@@ -1,3 +1,8 @@
 #!/usr/bin/env ruby
 
-puts "Ruby"
+require_relative "../lib/lang_fav"
+
+LangFav::CommandLine.new(
+  out: STDOUT.public_method(:puts),
+  arguments: ARGV,
+).run
