@@ -20,6 +20,8 @@ module LangFav
       repos = Array.new
       url = "https://api.github.com/users/#{for_user}/repos"
 
+      # This loops over pages of repos and adding them, until there is no longer
+      # a next link to follow
       loop do
         response = RestClient.get(url)
         json_repos = JSON.parse response

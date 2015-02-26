@@ -11,6 +11,7 @@ describe LangFav::User do
       described_class.new(username: username, repositories: repositories)
     }
 
+    # TODO: add contexts for edge cases (no repos, no predominant language)
     it "returns the user's favourite language" do
       expect(subject.favourite_language).to eq "Ruby"
     end
