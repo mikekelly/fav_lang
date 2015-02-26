@@ -1,21 +1,21 @@
 require "spec_helper"
+require "vcr"
+
+VCR.configure do |config|
+  config.cassette_library_dir = "spec/cassettes"
+  config.hook_into :webmock
+end
 
 describe LangFav::Api do
   subject(:api) { described_class.new }
   let(:username) { "mikekelly" }
 
   describe "#fetch_user" do
-    it "returns a user object" do
-      expect(api.fetch_user(username)).to be_a_kind_of LangFav::Api::User
-    end
-  end
+    let(:fetched_user) { api.fetch_user(username) }
 
-  describe LangFav::Api::User do
-    describe "#favourite_language" do
-      subject(:user) { described_class.new(username: username) }
-
-      it "returns the user's favourite language" do
-        expect(subject.favourite_language).to eq "Ruby"
+    it "returns an object with the expected favourite language" do
+      VCR.use_cassette("fetch_user") do
+        expect(fetched_user.favourite_language).to eq "Ruby"
       end
     end
   end

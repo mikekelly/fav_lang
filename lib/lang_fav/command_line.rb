@@ -1,3 +1,5 @@
+require_relative "api"
+
 module LangFav
   class CommandLine
     def initialize(out:, arguments:, api: Api.new)
